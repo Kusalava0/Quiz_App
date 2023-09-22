@@ -12,14 +12,24 @@ export default function Home() {
   }
 
   const handleChange = event => {
-    if (!isValidEmail(event.target.value)) {
+    const enteredEmail = event.target.value;
+    setEmail(enteredEmail);
+
+    if (!isValidEmail(enteredEmail)) {
       setError('Email is invalid');
     } else {
       setError(null);
     }
-
-    setEmail(event.target.value);
   };
+
+  const startQuizButton = isValidEmail(email) ? (
+    <Link href='/quiz'>
+      <button className='button'>Start Quiz</button>
+    </Link>
+  ) : (
+    <button className='btn-disabled' disabled>Start Quiz</button>
+  );
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className='flex flex-col '>
@@ -30,14 +40,7 @@ export default function Home() {
           value={email}
           onChange={handleChange}
         />
-        {error ? (
-          <Link href='/'>
-            <button className='btn-disabled'>Start Quiz</button>
-          </Link>
-        ) : (
-          <Link href='/quiz'>
-            <button className='button'>Start Quiz</button>
-          </Link>)}
+        {startQuizButton}
       </div>
     </main>
   )

@@ -12,7 +12,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <script src="https://kit.fontawesome.com/87250e21ec.js" crossorigin="anonymous"></script>
+        {/* Load Font Awesome asynchronously */}
+        <script
+          src="https://kit.fontawesome.com/87250e21ec.js"
+          crossorigin="anonymous"
+          async  // Add the async attribute to load the script asynchronously
+        ></script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
