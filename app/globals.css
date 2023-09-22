@@ -1,27 +1,269 @@
+/* Global styles */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  /* padding: 8rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000925;
+  overflow-x: hidden;
+}
+
+/* Container */
+.container {
+  max-width: 740px;
+  width: 100%;
+  margin: auto;
+  padding: 1rem;
+}
+
+/* Typography */
+h1,
+h2,
+h4 {
+  color: #eee;
+}
+
+h3 {
+  padding-bottom: 2rem;
+  color: #000105;
+  font-size: 1.5rem;
+}
+
+/* Form elements */
+input {
+  padding: 0.75rem;
+  font-size: large;
+}
+
+/* Buttons */
+.button {
+  padding: 10px;
+  width: 100%;
+  margin-top: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #000000;
+  color: #f8f8f8;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #000925;
+}
+
+/* Disabled button */
+.btn-disabled {
+  padding: 10px;
+  width: 100%;
+  margin-top: 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  background-color: lightgray;
+  cursor: not-allowed;
+  color: #f8f8f8;
+  transition: background-color 0.3s ease, color 0.3s ease
+}
+
+/* List items */
+li {
+  list-style-type: none;
+  cursor: pointer;
+  margin: 8px 0;
+  padding: 10px;
+  color: #000105;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.li-hover:hover {
+  background-color: #d8d8d8;
+  color: #000000;
+}
+
+.li-selected {
+  color: #fff;
+  background-color: #001d74;
+}
+
+/* Quiz container */
+.quiz-container {
+  background-color: #f8f8f8;
+  padding: 1rem;
+  margin-top: 2rem;
+  border-radius: 10px;
+}
+
+.container p {
+  padding: 8px 0;
+}
+
+/* Question navigation buttons */
+.question-navigation {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin-top: 20px;
+}
+
+.question-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  /* Fixed padding for buttons */
+  width: 50px;
+  /* Fixed width for buttons */
+  height: 50px;
+  /* Fixed height for buttons */
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.question-button.selected {
+  background-color: #000000;
+  border: 1px solid rgb(0, 55, 128);
+  color: white;
+}
+
+/* .question-button:hover {
+  background-color: #ddd;
+} */
+
+/* Define keyframes for scaling down */
+@keyframes scaleDown {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.75);
+    /* Scale down to 60% at the end */
+    opacity: 0;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Define keyframes for scaling up */
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.75);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* Apply the animation properties */
+.main-container,
+.question-container {
+  animation-duration: 0.3s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.modal::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.modal {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scale-down {
+  animation-name: scaleDown;
+}
+
+.scale-up {
+  animation-name: scaleUp;
+}
+
+
+/* Add these CSS styles to your stylesheet */
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 9, 37, 0.6);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.close:hover {
+  background-color: #ccc;
+}
+
+/* Add other styles for your modal as needed */
+.question-card {
+  border: 1px solid #ccc;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.question-text {
+  font-weight: bold;
+}
+
+.answer {
+  color: #333;
+}
+
+.answer.correct {
+  color: green;
+  /* Highlight correct answers in green */
+}
+
+.answer.incorrect {
+  color: red;
+  /* Highlight incorrect answers in red */
 }
